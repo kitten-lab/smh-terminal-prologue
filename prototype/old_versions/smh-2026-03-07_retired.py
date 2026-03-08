@@ -42,7 +42,7 @@ class s:
     sB = "\033[2m"
     x = '\033[00m'
 
-FAST_MODE = False # true when testing
+FAST_MODE = True # true when testing
 
 
 def prompt(text):
@@ -401,29 +401,44 @@ while True:
         print("The room closes. The fades to your reality once more.")
         break
 
-
+    if noun == "cat":
+        echoPrint("That's purrfect.")
+    
+           
     if verb == "look":
         if len(words) == 1:
             print(you.space.txt_look)
             echoPrint(you.space.echo_look)
-        else:
+        elif len(words) > 1:
             for item in you.space.things:
                 if item.name == noun:
                     success("SUCCESS")
                     print(item.txt_look)
-                else:
-                    fail(f"{noun} isn't real. Perhaps you made it up?")
-
             for item in you.memory:
                 if item.name == noun:
-                    if item in you.space.things:
-                        success("SUCCESS")
-                        print(item.txt_look)
-                    else:
-                        success("SUCCESS")
-                        print(item.txt_look)
-                else:
-                    fail(f"{noun} isn't real. Perhaps you made it up?")
+                    event_partialsuccess("YOU REMEMBER SOMETHING")
+                    print("Check your mem.")
+                    print(item.txt_look)
+            
+
+    if verb == "look2":
+        if len(words) == 1:
+            print(you.space.txt_look)
+            echoPrint(you.space.echo_look)
+            if item in you.space.things:
+                if item.name == noun:
+                    success("SUCCESS")
+                    print(item.txt_look)
+            if item in you.memory:
+                    event_partialsuccess("YOU REMEMBER SOMETHING")
+                    print("Check your mem.")
+                    print(item.txt_look)
+            else:
+                print(item.txt_look)
+                fail(f"{noun} isn't real. Perhaps you made it up?")
+
+
+                    
 
     if verb == "remember":
         if len(words) == 1:
