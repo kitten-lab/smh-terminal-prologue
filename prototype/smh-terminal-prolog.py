@@ -190,13 +190,40 @@ class Thought(object):
 calm = Emotions("Calm", "I am calm.")
 
 # BARA THOUGHTS
-t1 = Thought(1, "Where Am I?", "I wonder where I am? Did I try looking?")
-t2 = Thought(2, "What Am I?", "Wait! What am I? I'm trying to remember...")
+t1 = Thought(1, "Where Am I?", "I wonder who I am? Did I try looking?")
+t2 = Thought(2, "What Am I?", "Wait! Who am I? I'm trying to remember...")
 t3 = Thought(3, "Why Can't I Remember?", "Shit, I can't think.. What was I thinking about?")
 t4 = Thought(4, "Who Am I?", "Who am I? I can't seem to remember.")
 
 
 # BARA CONCEPTS
+who = Concept(
+    name = "who",
+    title_look = "YOU TRY TO LOOK AT WHO",
+    txt_look = "The lack of mirrors make this painfully awkward. You cannot see yourself. Do you even exist at all?",
+    echo_look = "Well, its something at least.",
+    title_think = "I THINK THEREFORE I AM",
+    txt_think = "I consider my Self. It must be something. The fact that I can think at all must be proof of that. Right?",
+    echo_think = "Yeah, I know. Trust me, I'm looking into it.",
+    title_mem = "I CAN REMEMBER I AM",
+    txt_mem = "The concept of presense. A self.",
+    echo_mem = "This self business looks kind of good on you, boss.",
+    is_memorable = True)
+
+
+what = Concept(
+    name = "what",
+    title_look = "YOU TRY TO LOOK AT WHAT",
+    txt_look = "There is a real distinct lack of in or out. What is what? Do I remember?",
+    echo_look = "What... are you looking at? Oh. Exactly.",
+    title_think = "IT ISN'T ME. WHAT IS IT?",
+    txt_think = "I sense somehow that what lies beyond the edges of myself. What am I? Do I know yet?",
+    echo_think = "There is no records about what you are. Strange. Never seen this problem before.",
+    title_mem = "I CAN REMEMBER WHAT IS",
+    txt_mem = "The concept of something. Whatever it is..",
+    echo_mem = "You make this experience pretty weird, you know?",
+    is_memorable = True)
+
 static = Concept(
     name = "static",
     title_look = "IN THE NOTHING, THERE LIES A PATTERN.",
@@ -227,9 +254,7 @@ void = Space(
     There is nothing. You think its calling you.
 """,
     echo_think = "",
-    txt_mem = """
-  YOU REMEMBER NOTHING.
-
+    txt_mem = """YOU REMEMBER NOTHING.
     That doesn't mean much, does it? Remembering nothing?
     Was there something before that?
 """,
@@ -240,7 +265,7 @@ void.thoughts.append(t1)
 void.thoughts.append(t2)
 void.thoughts.append(t3)
 void.thoughts.append(t4)
-void.concepts.append(static)
+void.concepts.append(who)
 
 # BARA SOMEONE
 you = You("Sam", void)
@@ -297,7 +322,7 @@ def titlePrint(text):
     print("  " + text)
 
 def textPrint(text):
-    wrapped_text_custom = textwrap.fill(text, width=60, initial_indent="  >  ", subsequent_indent="  >  ")
+    wrapped_text_custom = textwrap.fill(text, width=60, initial_indent="  |  ", subsequent_indent="  |  ")
     print(wrapped_text_custom)
     
 
@@ -368,9 +393,11 @@ while True:
     if verb == "think":
         Spacer()
         if len(words) == 1:
-            print("  I try thinking. I can always try to think.")
+            event_fail(f"TRYING TO THINK")
             thought = random.choice(you.space.thoughts)
-            thoughtPrint(thought.txt)
+            textPrint(generate_quote())
+            print()
+            echoPrintY(thought.txt)
         if len(words) > 1:
             event_fail(f"TRYING TO THINK ABOUT {noun1}")
             for item in you.space.concepts:
@@ -387,10 +414,12 @@ while True:
             for item in you.memory:
                 if item.name == noun1:
                     flag = True
-                    event_partialsuccess(f"I try thinking of {item.name}. It works!")
                     titlePrint(item.title_think)
                     textPrint(item.txt_think)
+                    warning(f"Concept '{item.name}' unstable")
+
                     echoPrint(item.echo_think)
+                    break
                 else:
                     flag = False
                     error(" ")
@@ -403,7 +432,7 @@ while True:
                     event_partialsuccess("ALREADY REMEMBERED")
                     echoPrint("Yes, yes. We already remembered {}.".format(you.space.name))
                 else:
-                    success("Memory aquired: {}.".format(you.space.name) + " You'll remember this.")
+                    success("Concept aquired: '{}'".format(you.space.name) + " You'll remember this.")
                     print(you.space.txt_mem)
                     echoPrint(you.space.echo_mem)
                     you.memory.append(you.space)
@@ -418,9 +447,10 @@ while True:
                 if item.name == noun1:
                     if item.is_memorable == True:
                         flag = True
-                        success("Memory aquired: {}.".format(item.name) + " You'll remember this.")
-                        print(item.title_mem)
-                        print(item.txt_mem)
+                        warning(f"[ID UNSTABLE {random.randint(100, 200)}]")
+                        titlePrint(item.title_mem)
+                        textPrint(item.txt_mem)
+                        success("Concept aquired: '{}'.".format(item.name) + " You'll remember this.")
                         echoPrint(item.echo_mem)
                         you.memory.append(item)
                         you.space.concepts.remove(item)
