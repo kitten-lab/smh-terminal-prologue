@@ -289,44 +289,9 @@ def generate_quote():
         "\"Talk is cheap. Show me the code.\" — Linus Torvalds" 
     ]
     return random.choice(quotes)
-print("""
-======================================================
 
-     ___           ___                       ___      
-    /  /\         /  /\                     /  /\     
-   /  /::\       /  /::\         ___       /  /::|    
-  /  /:/\:\     /__/:/\:\       /__/\     /  /:|:|    
- /  /::\ \:\    \  \:\ \:\      \__\:\   /  /:/|:|__  
-/__/:/\:\_\:\ ___\__\:\_\:\     /  /::\ /__/:/_|::::\ 
-\__\/  \:\/:/ \  \:::::\/:/  __/  /:/\/ \__\/  /~~/:/ 
-     \__\::/   ~~~~\~~\::/  /__/\/:/~~        /  /:/  
-     /  /:/        /~~/:/   \  \::/          /  /:/   
-    /__/:/        /__/:/     \  \:\         /__/:/    
-    \__\/         \__\/       \__\/         \__\/     
-
-version 13.9
-
-W E L C O M E  H O M E
-======================================================
-
-....sɹǝʇǝɯɐɹɐd uoᴉʇɐʇuǝᴉɹo ƃuᴉʇsǝʇ
-ʇǝsʇᴉuƃ oɹᴉǝuʇɐʇᴉou dɐɹɐɯǝʇǝɹs
-
-.
-. .
-.
-sretemarap noitatneiro gnitset
-.
- .
-  .
- .
-.
-testing orientation parameters ....
-
-""")
-success("SUCCESSFUL")
-error("ERR714714714"[::-1])
-errorb(f"DIFFICULTY PARSING SELF CONCEPT"[::-1])
+error("ERR714714714")
+errorb(f"DIFFICULTY PARSING SELF CONCEPT")
 slowPrint("""
    Reconfiguring master file el.json . . .
    Defining conceptual variables . . .
@@ -334,19 +299,15 @@ slowPrint("""
    . . .
    . . .
 """)
-prompt(text=" INPUT > ")
-timerM()
-typing(" RUN sam.exe /eiden")
-timerS()
 event_success("SUCCESS")
 print(f"Concept achieved {s.ga}[CANNOT VALIDATE ID]{s.x}\n")
-success("Instance I.AM in {LOCATION_NAME}")
-fail("LOCATION_NAME is null")
-fail("IDENTITY UNSTABLE. Type Connect to run, Terminate to Void the instance.")
 prompt(text=" INPUT > ")
 timerM()
-typing(" CONNECT sam.exe /eiden --diagonostics")
+typing(" RUN self.exe")
 timerS()
+
+success("Instance I.AM in {LOCATION_NAME}")
+fail("LOCATION_NAME is null")
 print("""
    YOU ARE SOMEWHERE. 
    
