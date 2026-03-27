@@ -1,4 +1,4 @@
-# SMH: Terminal Prolouge
+# Silo Terminal Prolog
 
 An experimental terminal-based narrative prototype exploring memory, identity, and recursive thinking mechanics.
 
